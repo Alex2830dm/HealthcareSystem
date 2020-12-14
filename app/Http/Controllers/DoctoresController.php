@@ -21,7 +21,11 @@ class DoctoresController extends Controller
     {
         $doctores=Doctores::all();
         return response()->json(['doctores'=>$doctores]);
-    }    
+    }
+    public function list(){
+        $datos['doctores']=Doctores::paginate(5);
+        return view("doctores.index", $datos);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -45,7 +49,12 @@ class DoctoresController extends Controller
         $doctores->Nombre = request('Nombre');
         $doctores->Apellidos = request('Apellidos');
         $doctores->Cedula = request('Cedula');
-        $doctores->Especialidad = request('Especialidad');        
+        $doctores->Especialidad = request('Especialidad');
+        $doctores->Direccion = request('Direccion');
+        $doctores->Telefono = request('Telefono');
+        $doctores->Zona = request('Zona');
+        $doctores->consulta = request('consulta');
+        $doctores->consultadom = request('consultadom');
         $doctores->save();
         //$doctores = $this->doctores->create($request->all());    
         //return response()->json($doctores);
@@ -82,8 +91,20 @@ class DoctoresController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Doctores::find($id)->update($request->all());
-        return;
+        //Doctores::find($id)->update($request->all());
+        //return;
+        $doctores = Doctores::findOrFail($id);
+        $doctores->Nombre = request('Nombre');
+        $doctores->Apellidos = request('Apellidos');
+        $doctores->Cedula = request('Cedula');
+        $doctores->Especialidad = request('Especialidad');
+        $doctores->Direccion = request('Direccion');
+        $doctores->Telefono = request('Telefono');
+        $doctores->Zona = request('Zona');
+        $doctores->consulta = request('consulta');
+        $doctores->consultadom = request('consultadom');
+        $doctores->update();
+        return response()->json($doctores);
     }
 
     /**
@@ -94,6 +115,7 @@ class DoctoresController extends Controller
      */
     public function destroy(Doctores $doctores)
     {
-        //
+        $doctores->delete();
+        return response()->json('El registro fue eliminado');
     }
 }

@@ -18,7 +18,12 @@ class CreateDoctoresTable extends Migration
             $table->String('Nombre');
             $table->String('Apellidos');
             $table->String('Cedula');
-            $table->String('Especialidad');        
+            $table->String('Especialidad');
+            $table->String('Direccion');
+            $table->String('Telefono');
+            $table->String('Zona');
+            $table->float('consulta');
+            $table->float('consultadom');
             $table->timestamps();
         });
     }

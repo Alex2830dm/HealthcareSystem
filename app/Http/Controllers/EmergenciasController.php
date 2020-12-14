@@ -20,7 +20,7 @@ class EmergenciasController extends Controller
     public function index()
     {
         $emergencias=Emergencias::all();
-        return response()->json(['emergencias'=>$emergencias]);
+        return response()->json(['emergencias'=>$emergencias]);    
     }  
     
 

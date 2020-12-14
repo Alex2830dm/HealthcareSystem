@@ -43,30 +43,30 @@
                 <ul class="navbar-nav mr-auto">
                     <H5>
                         <li class="nav-item active">
-                            <a class="nav-link text-white" href="{{url('usuarios/')}}">Inicio<span class="sr-only">(current)</span></a>
+                            <a class="nav-link text-white" href="{{url('admin/')}}">Inicio<span class="sr-only">(current)</span></a>
                         </li>
                     </H5>
                     <H5>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="{{url('usuarios/quienes-somos')}}" role="button" aria-haspopup="true" aria-expanded="false">¿Quienes Somos?</a>
+                            <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="{{url('admin/quienes-somos')}}" role="button" aria-haspopup="true" aria-expanded="false">¿Quienes Somos?</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="{{url('usuarios/quienes-somos')}}">¿Quienes Somos?</a>
-                                <a class="dropdown-item" href="{{url('usuarios/unete-hs')}}">Unete a Healthceare System</a>              
+                                <a class="dropdown-item" href="{{url('admin/quienes-somos')}}">¿Quienes Somos?</a>
+                                <a class="dropdown-item" href="{{url('admin/unete-hs')}}">Unete a Healthceare System</a>              
                             </div>
                         </li>
                     </H5>
                     <H5>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="{{url('usuarios/primeros-auxilios')}}" role="button" aria-haspopup="true" aria-expanded="false">Servicios</a>
+                            <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="{{url('admin/primeros-auxilios')}}" role="button" aria-haspopup="true" aria-expanded="false">Servicios</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="{{url('usuarios/primeros-auxilios')}}">Primeros Auxilios</a>
-                                <a class="dropdown-item" href="{{url('usuarios/emergencias')}}">Emergencias</a>                        
+                                <a class="dropdown-item" href="{{url('admin/primeros-auxilios')}}">Primeros Auxilios</a>
+                                <a class="dropdown-item" href="{{url('admin/emergencias')}}">Emergencias</a>                        
                             </div>
                         </li>
                     </H5>  
                     <H5>
                         <li class="nav-item active">
-                            <a class="nav-link text-white" href="{{url('usuarios/doctores')}}">Doctores<span class="sr-only">(current)</span></a>
+                            <a class="nav-link text-white" href="{{url('admin/doctores')}}">Doctores<span class="sr-only">(current)</span></a>
                         </li>
                     </H5>                
             </ul>                                
@@ -75,7 +75,7 @@
             <!-- Main Sidebar Container -->
             <aside class="main-sidebar sidebar-dark-primary elevation-4">
                 <!-- Brand Logo -->
-                <a href="{{ url('/') }}" class="brand-link">                                            
+                <a href="{{ url('admin/') }}" class="brand-link">                                            
                     <span class="brand-text font-weight-light">Healthcare System</span>
                 </a>
 
@@ -118,7 +118,7 @@
                                 </a>
                             </li>
                             <li>
-                                <form action="{{url('usuarios/historial/'. Auth::user()->id)}}" method="post">
+                                <form action="{{url('admin/historial/'. Auth::user()->id)}}" method="post">
                                     <button type="submit" class="btn btn-secondary">
                                         <img src="https://previews.123rf.com/images/jemastock/jemastock1708/jemastock170809156/84057196-un-dise%C3%B1o-de-ilustraci%C3%B3n-de-vector-de-imagen-de-icono-de-historial-de-historial-de-medicina-m%C3%A9dica-de-hobby-.jpg"
                                             width="20">
@@ -127,10 +127,10 @@
                                 </form>
                             </li><br>
                             <li class="nav-item">
-                                <a href="{{url('admin/')}}">
+                                <a href="{{url('usuarios/')}}">
                                     <button class="btn btn-success">
                                         <img src="https://image.flaticon.com/icons/png/512/1713/1713277.png" width="20">
-                                        Administrador
+                                        Usuario
                                     </button>
                                 </a>                                    
                             </li><br>                            

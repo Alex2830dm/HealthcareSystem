@@ -113,7 +113,7 @@ export default {
         },
         //función para editar Materia
         RegistrarCita(){            
-            var url = 'http://127.0.0.1:8000/usuarios/registrar-cita';
+            var url = 'http://127.0.0.1:8000/usuarios/registrar';
             //actualizamos la materia
             axios.put(url, this.Citas).then(response =>{
                 this.getDoctores();

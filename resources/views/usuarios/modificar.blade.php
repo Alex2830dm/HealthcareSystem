@@ -14,25 +14,47 @@
         </ul>
     </div>
 @endif
-  <form action="{{url('usuarios/update', Auth::user()->id )}}" method="POST">  
-    @csrf
+  <form action="{{url('usuarios/update/' . $usuario->id)}}" method="post">
+@csrf
     {{method_field('PATCH')}}
-    <div class="container-sm">   
-      <div class="row justify-content-center">        
+<div class="container-sm">   
+    <div class="row justify-content-center">        
         <div class="col-4">
-          <label class="text-center">Foto de Pefil:</label><br>
-          <img src="https://cdn.icon-icons.com/icons2/1154/PNG/512/1486564400-account_81513.png" width="200" heigh="auto">
+            <label class="text-center">Foto de Pefil:</label><br>
+            <img src="https://static.vecteezy.com/system/resources/previews/000/574/512/non_2x/vector-sign-of-user-icon.jpg" width="220" heigh="auto">
+        </div>        
+        <div class="col-4">
+            <label class="text-center">Nombre:</label>
+            <input class="form-control" type="text" name="name" value="{{ $usuario->name }}">
+            <label class="text-center">Apellido:</label>
+            <input class="form-control" type="text" name="apellidos" value="{{ $usuario->apellidos }}">
+            <label class="text-center">Telefono:</label>
+            <input class="form-control" type="text" name="telefono" value="{{ $usuario->telefono }}">
         </div>
-        <div class="col-4">        
-          <label for="nombre">Nombre:</label>
-          <input type="text" name="name" id="name" class="form-control" value="{{$usuario->name}}">
-          <label for="email">Correo:</label>
-          <input type="text" name="email" id="email" class="form-control" value="{{$usuario->email}}">
-        </div><br>    
-      </div>
-      <div class="row justify-content-center">
-        <input type="submit" class="btn btn-outline-success" value="Actualizar">
-      </div>
-    </div>   
-  </form>
+    </div><br>
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <label class="text-center">Correo:</label>
+            <input class="form-control" type="text" name="email" value="{{ $usuario->email }}">            
+        </div>        
+        <div class="col-4">
+            <label class="text-center">Zona:</label>
+            <input class="form-control" type="text" name="zona" value="{{ $usuario->zona }}">
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <label class="text-center">Direccion:</label>
+            <input class="form-control" type="text" name="direccion" value="{{ $usuario->direccion }}" >
+        </div>      
+    </div><br>
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <button type="submit" class="btn btn-info"> Confirmar Modificacion</button>
+            </a>
+        </div>        
+    </div>
+</div>
+</form>
 @endsection
+

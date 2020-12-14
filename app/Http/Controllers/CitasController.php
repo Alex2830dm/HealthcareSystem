@@ -18,10 +18,13 @@ class CitasController extends Controller
     public function __construct (Citas $citas) {
        $this->cita = $citas;
     }
-    public function index()
-    {
-        //
+    public function index($id)
+    {                
+        $datos['citas']=Citas::all()->where('id', '=', $id);
+        return view("usuarios.historial", $datos);
+
     }
+    
     public function cita($id){
         return view('doctores.citas', ['citas'=> Doctores::findOrFail($id)]);
     }
@@ -43,17 +46,31 @@ class CitasController extends Controller
      */
     public function store(Request $request)
     {
-        $citas = $this->cita->create($request->all());
-        return response()->json($citas);
+        //$citas = $this->cita->create($request->all());
+        $citas = new Citas;
+        $citas->id_doctor = request('id_doctor');
+        $citas->Nombre = request('Nombre');
+        $citas->Apellidos = request('Apellidos');
+        $citas->id_usuario = request('id_usuario');
+        $citas->usuario = request('usuario');
+        $citas->usuariosape = request('usuariosape');
+        $citas->direccion = request('direccion');
+        $citas->tipo = request('tipo');    
+        $citas->fecha = request('fecha');
+        $citas->costo = request('costo');
+        $citas->save();
+        //return response()->json($citas);
+        return redirect('usuarios/home');
     }
 
     public function historial(Request $request){
-        $query = $request->get('buscar');
-        $users = Citas::where('usuario', 'LIKE', '%'. $query . "%");
-        return response()->json($users);
+        //$query = $request->get('buscar');
+        //$users = Citas::where('usuario', '=',  'Alex Donaldo');
+        //return response()->json($users);
         //$user = Citas::where("id_usuario","=", "1");
-        //return response()->json($user);
-        //$datos = Citas::find($id_usuario);
+        $users = Citas::select("SELECT * FROM Citas WHERE Nombre = 'Anaid'");
+        return response()->json($users);
+        //$datos = Citas::where("usuario", "=", "Alex Donaldo");
         //return $datos;
     }
     /**

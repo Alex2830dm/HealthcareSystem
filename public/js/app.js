@@ -2036,6 +2036,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2046,16 +2088,26 @@ __webpack_require__.r(__webpack_exports__);
         Nombre: "",
         Apellidos: "",
         Cedula: "",
-        Especialidad: ""
+        Especialidad: "",
+        Direccion: "",
+        Telefono: "",
+        Zona: "",
+        consulta: "",
+        consultadom: ""
       },
       //array para obtener eliminar una materia materia
-      emergenciadelete: [],
+      eliminardoc: [],
       //array para modificar una materia en especifico
       editDocs: {
         Nombre: "",
         Apellidos: "",
         Cedula: "",
-        Especialidad: ""
+        Especialidad: "",
+        Direccion: "",
+        Telefono: "",
+        Zona: "",
+        consulta: "",
+        consultadom: ""
       }
     };
   },
@@ -2077,7 +2129,11 @@ __webpack_require__.r(__webpack_exports__);
         _this.nuevodoc.Nombre = "";
         _this.nuevodoc.Apellidos = "";
         _this.nuevodoc.Cedula = "";
-        _this.nuevodoc.Especialidad = ""; //cerramos el modal
+        _this.nuevodoc.Especialidad = "";
+        _this.nuevodoc.Direccion = "";
+        _this.nuevodoc.Zona = "";
+        _this.nuevodoc.consulta = "";
+        _this.nuevodoc.consultadom = ""; //cerramos el modal
 
         $('#guardarModal').modal('hide');
         toastr.success('La materia se guardo con exito'); // se ejecuta la alerta
@@ -2103,6 +2159,11 @@ __webpack_require__.r(__webpack_exports__);
       this.editDocs.Apellidos = doctor.Apellidos;
       this.editDocs.Cedula = doctor.Cedula;
       this.editDocs.Especialidad = doctor.Especialidad;
+      this.editDocs.Direccion = doctor.Direccion;
+      this.editDocs.Telefono = doctor.Telefono;
+      this.editDocs.Zona = doctor.Zona;
+      this.editDocs.consulta = doctor.consulta;
+      this.editDocs.consultadom = doctor.consultadom;
       $('#updateModal').modal('show');
     },
     //función para editar Materia
@@ -2120,10 +2181,28 @@ __webpack_require__.r(__webpack_exports__);
           Nombre: "",
           Apellidos: "",
           Cedula: "",
-          Especialidad: ""
+          Especialidad: "",
+          Direccion: "",
+          Telefono: "",
+          Zona: "",
+          consulta: "",
+          consultadom: ""
         };
         $('#updateModal').modal('hide');
       })["catch"](function (error) {});
+    },
+    deleteid: function deleteid(id) {
+      this.eliminardoc = id;
+    },
+    deleteDoctor: function deleteDoctor(id) {
+      var _this4 = this;
+
+      var url = "http://127.0.0.1:8000/admin/deletedoc/" + id;
+      axios["delete"](url, this.eliminardoc).then(function (response) {
+        _this4.getDoctores();
+
+        $('#updateModal').modal('hide');
+      });
     }
   }
 });
@@ -2442,7 +2521,7 @@ __webpack_require__.r(__webpack_exports__);
     RegistrarCita: function RegistrarCita() {
       var _this2 = this;
 
-      var url = 'http://127.0.0.1:8000/usuarios/registrar-cita'; //actualizamos la materia
+      var url = 'http://127.0.0.1:8000/usuarios/registrar'; //actualizamos la materia
 
       axios.put(url, this.Citas).then(function (response) {
         _this2.getDoctores();
@@ -38181,6 +38260,8 @@ var render = function() {
               domProps: { textContent: _vm._s(doctor.Especialidad) }
             }),
             _vm._v(" "),
+            _c("th", { domProps: { textContent: _vm._s(doctor.Telefono) } }),
+            _vm._v(" "),
             _c("th", [
               _c(
                 "button",
@@ -38219,7 +38300,7 @@ var render = function() {
                   },
                   on: {
                     click: function($event) {
-                      return _vm.deleteid(_vm.materia)
+                      return _vm.deleteDoctor(doctor)
                     }
                   }
                 },
@@ -38408,6 +38489,177 @@ var render = function() {
                             _vm.$set(
                               _vm.nuevodoc,
                               "Especialidad",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "recipient-Direccion" }
+                        },
+                        [_vm._v("Direccion:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.nuevodoc.Direccion,
+                            expression: "nuevodoc.Direccion"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", name: "Direccion" },
+                        domProps: { value: _vm.nuevodoc.Direccion },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.nuevodoc,
+                              "Direccion",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "recipient-Telefono" }
+                        },
+                        [_vm._v("Telefono:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.nuevodoc.Telefono,
+                            expression: "nuevodoc.Telefono"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", name: "Telefono" },
+                        domProps: { value: _vm.nuevodoc.Telefono },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.nuevodoc,
+                              "Telefono",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "recipient-Zona" }
+                        },
+                        [_vm._v("Zona:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.nuevodoc.Zona,
+                            expression: "nuevodoc.Zona"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", name: "Zona" },
+                        domProps: { value: _vm.nuevodoc.Zona },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.nuevodoc, "Zona", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "recipient-consulta" }
+                        },
+                        [_vm._v("$ Consulta:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.nuevodoc.consulta,
+                            expression: "nuevodoc.consulta"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", name: "consulta" },
+                        domProps: { value: _vm.nuevodoc.consulta },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.nuevodoc,
+                              "consulta",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "recipient-consultadom" }
+                        },
+                        [_vm._v("$ Consulta A Domicilio:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.nuevodoc.consultadom,
+                            expression: "nuevodoc.consultadom"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", name: "consultadom" },
+                        domProps: { value: _vm.nuevodoc.consultadom },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.nuevodoc,
+                              "consultadom",
                               $event.target.value
                             )
                           }
@@ -38613,11 +38865,244 @@ var render = function() {
                             )
                           }
                         }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "recipient-name" }
+                        },
+                        [_vm._v("Direccion:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.editDocs.Direccion,
+                            expression: "editDocs.Direccion"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", name: "Direccion" },
+                        domProps: { value: _vm.editDocs.Direccion },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.editDocs,
+                              "Direccion",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "recipient-name" }
+                        },
+                        [_vm._v("Telefono:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.editDocs.Telefono,
+                            expression: "editDocs.Telefono"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", name: "Telefono" },
+                        domProps: { value: _vm.editDocs.Telefono },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.editDocs,
+                              "Telefono",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "recipient-name" }
+                        },
+                        [_vm._v("Zona:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.editDocs.Zona,
+                            expression: "editDocs.Zona"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", name: "Zona" },
+                        domProps: { value: _vm.editDocs.Zona },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.editDocs, "Zona", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "recipient-name" }
+                        },
+                        [_vm._v("$ Consulta:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.editDocs.consulta,
+                            expression: "editDocs.consulta"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", name: "consulta" },
+                        domProps: { value: _vm.editDocs.consulta },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.editDocs,
+                              "consulta",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "recipient-name" }
+                        },
+                        [_vm._v("$ Consulta A Domicilio:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.editDocs.consultadom,
+                            expression: "editDocs.consultadom"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", name: "consultadom" },
+                        domProps: { value: _vm.editDocs.consultadom },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.editDocs,
+                              "consultadom",
+                              $event.target.value
+                            )
+                          }
+                        }
                       })
                     ]),
                     _vm._v(" "),
                     _vm._m(4)
                   ]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "deletemateria",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(5),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("h4", [
+                  _vm._v("¿Esta seguro que quieres eliminar la materia "),
+                  _c(
+                    "span",
+                    { staticClass: "badge badge-pill badge-warning" },
+                    [_vm._v(_vm._s(_vm.eliminardoc.Nombre))]
+                  ),
+                  _vm._v("?")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Cancelar")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteDoctor(_vm.eliminardoc.id)
+                      }
+                    }
+                  },
+                  [_vm._v("Eliminar")]
                 )
               ])
             ])
@@ -38641,6 +39126,8 @@ var staticRenderFns = [
         _c("th", [_vm._v("Cedula")]),
         _vm._v(" "),
         _c("th", [_vm._v("Especialidad")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Telefono")]),
         _vm._v(" "),
         _c("th", [_vm._v("Acciones")])
       ])
@@ -38733,6 +39220,31 @@ var staticRenderFns = [
           attrs: { ttype: "submit", name: "action" }
         },
         [_vm._v("Actualizar")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Eliminar Materia")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
     ])
   }

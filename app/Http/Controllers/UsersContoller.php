@@ -95,8 +95,13 @@ class UsersContoller extends Controller
         $usuarios = User::findOrFail($id);
         $usuarios->name = $request->get('name');     
         $usuarios->email = $request->get('email');
+        $usuarios->apellidos = $request->get('apellidos');
+        $usuarios->telefono = $request->get('telefono');
+        $usuarios->zona = $request->get('zona');
+        $usuarios->direccion = $request->get('direccion');
         $usuarios->update();    
-        return response()->json($usuarios);
+        return redirect('usuarios/home');
+        //return response()->json($usuarios);
     }
 
     /**

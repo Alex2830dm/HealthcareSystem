@@ -94,7 +94,7 @@
         <div class="top-right links">
             @auth
               <button type="button" class="btn btn-outline-secondary">
-                <a href="{{ url('home') }}" class="text-white">Perfil</a>
+                <a href="{{ url('usuarios/home') }}" class="text-white">Perfil</a>
               </button>                
             @else
                 <a href="{{ route('login') }}" class="text-white">Login</a>

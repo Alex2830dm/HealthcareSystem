@@ -1,108 +1,92 @@
 @extends('layouts.app')
 @section('content')
+<script type="text/javascript">
+      function valor() {
+        var tipo = document.getElementById("tipo").value;
+          if(tipo = "Consultorio"){
+            var n1 = document.getElementById("precio1").value;         
+            var resultado = parseInt(n1);
+          }else if(tipo = "Domicilio"){            
+            var n2 = document.getElementById("precio2").value;
+            var resultado = parseInt(n2)
+          }
+        document.getElementById("resultado").value = resultado;
+      }
+    </script>
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <center>
     <h1>Doctores</h1>
     </center>
 </div>
 <div class="container-sm">
-    <form action="{{url('usuarios/registrar-cita')}}" method="post">
-        <div class="row justify-content-center">
-            <div class="col-4">
-                <label for="id">Usuario</label>
-                <input type="text" name="id_usuario" id="id_usuario" class="form-control" value="{{ Auth::user()->id }}">
-            </div>
-            <div class="col-4">
-                <label for="id">Doctor</label>
-                <input type="text" name="id_doctor" id="id_doctor" class="form-control" value="{{$citas->id}}">
-            </div>
+    <form action="{{url('usuarios/registrar')}}" method="post">            
+    <div class="row">
+        <div class="col-5">            
+            <input type="text"value="{{$citas->id}}" class="form-control" name="id_doctor"  id="id_doctor" readonly hidden>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-4">
-                <label for="fecha"></label>
-                <input type="date" name="Fecha" id="fecha" class="form-control">
-            </div>
-            <div class="col-4">
-                <label class="text-center">Doctor:</label>
-                <input class="form-control" type="text" name="doctor" value="{{$citas->Nombre}}">
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-4">
-                <label class="text-center">Usuario:</label>
-                <input class="form-control" type="text" name="usuario" value="{{Auth::user()->name}}">
-            </div>
-            <div class="col-4"><br>
-            <input type="submit" class="btn btn-outline-success" value="Confirmar">
-            </div>
-        </div>
-    </form>        
-        <!--<div class="col-4">
-            <label class="text-center">Foto del Doctor:</label><br>
-            <img src="{{asset('Fotos_perfil/'.$citas->imagen)}}" width="200" height="auto">
-        </div>
-        <div class="col-4">
-            <label class="text-center">Nombre:</label>
-            <input class="form-control" type="text" name="nombre" value="{{$citas->Nombre}}">
-            <label class="text-center">Apellido:</label>
-            <input class="form-control" type="text" name="apellido" value="{{$citas->Apellidos}}">
-            <label class="text-center">Cedula:</label>
-            <input class="form-control" type="text" name="cedula" value="{{$citas->Cedula}}">
-        </div>
-    </div><br>
-    <div class="row justify-content-center">
-        <div class="col-8">
-            <label class="text-center">Direccion:</label>
-            <input class="form-control" type="text" name="direccion" value="Carretera Huitzizilapan 1">
+        <div class="col-5">            
+            <input type="text" value="{{ Auth::user()->id }}" class="form-control" name="id_usuario" id = "id_usuario" readonly hidden>
         </div>
     </div>
-    <div class="row justify-content-center">
-        <div class="col-4">
-            <label class="text-center">Precio En Consultario:</label>
-            <input class="form-control" type="text" name="direccion" value="Carretera Huitzizilapan 1">
+    <div class="row">
+        <div class="col-5">
+            <label for="Nombre" class="col-form-label">Doctor:</label>
+            <input type="text"value="{{$citas->Nombre}}" class="form-control" name="Nombre"  id="Nombre" readonly>
         </div>
-        <div class="col-4">
-            <label class="text-center">Precio A Domicilio:</label>
-            <input class="form-control" type="text" name="direccion" value="Carretera Huitzizilapan 1">
+        <div class="col-5">
+            <label for="" class="col-form-label">Apellidos:</label>
+            <input type="text" value="{{$citas->Apellidos}}" class="form-control" name="Apellidos" id = "Apellidos" readonly>
         </div>
-    </div><br>
-    <div class="row justify-content-center">
-        <div class="col-8"> 
-            <select aria-label="zona" name="zona" id="zona" title="zona" class=" form-control">
-                <option value="0">Selecciona tu Municipio</option>
-                <option value="Lerma">Lerma</option>
-                <option value="Xonacatlan">Xonacatlan</option>
-                <option value="Toluca">Toluca</option>
-                <option value="Metepec">Metepec</option>
-                <option value="Ocoyoacac">Ocoyoacac</option>
-            </select> <br> <input name="suma" type="button" onClick="valor()" value="Buscar valor" class="btn btn-info" /><br><br>
-            <label for='n2'>Precio adicional:</label>
-            <input  type='text' id='n2' size='4' maxlength='5' class='form-control' readonly/><br>                        
-        </div> 
     </div>
-    <div class="row justify-content-center">
-        <div class="col-8">
-            <label for="resultado">Sub Total:</label>         
-            <input type="text" id="resultado" class="form-control" readonly/>                        
-        </div>             
-    </div>                  
-    <div class="row justify-content-center">
-        <font face="Comic Sans MS,Arial,Verdana" size=2 color="#AFAFAF">
-        Nota: el precio puede aumentar de acuerdo al equipo y/o medicamento que utlice el doctor<br>
-        Solo se acepta pagos por efectivo                 
-        </font> 
-        <div class="col-8">
-            <button class="btn btn-sm btn-outline-success btn-block" type="submit">Enviar</button>
+    <div class="row">
+        <div class="col-5">
+            <label for="" class="col-form-label">Paciente:</label>
+            <input type="text" value="{{ Auth::user()->name }}" class="form-control" name="usuario" id="usuario">                                
         </div>
+        <div class="col-5">
+            <label for="" class="col-form-label">Apellidos:</label>
+            <input type="text"  class="form-control" name="usuariosape" id="usuariosape" value="{{ Auth::user()->apellidos}}">
+        </div>                            
+    </div>
+    <div class="row">
+        <div class="col-5">
+            <label for="direccion">Dirección</label>
+            <input type="text" name="direccion" id="direccion" class="form-control" value="{{ Auth::user()->direccion }}">
+        </div>
+        <div class="col-5">
+            <label for="fecha" class="col-form-label">Fecha:</label>
+            <input type="date"  class="form-control" name="fecha" id="fecha">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-5">            
+            <input class="form-control" type="text" value="{{$citas->consulta}}" id = "precio1"readonly hidden>
+        </div>
+        <div class="col-5">            
+            <input type="text" class="form-control" value="{{$citas->consultadom}}" id = "precio2" readonly hidden>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-5">
+            <label for="tipo" class="col-form-label">Tipo:</label>
+            <select name="tipo" id="tipo" class="form-control">
+                <option value="Consultorio">En Consultorio</option>
+                <option value="Domicilio">A Domicilio</option>
+            </select>
+        </div>
+        <div class="col-5"><br>
+        <input name="suma" type="button" onClick="valor()" value="Buscar valor" class="btn btn-info" />
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-5">
+        <label for="costo">Costo:</label>
+        <input type="text" name="costo" id="resultado" class="form-control" readonly/>
+      </div>
     </div><br>
-    </form>       
-    <div class="row justify-content-center">
-        <div class="col-4">
-            <button type="button" class="btn btn-outline-info">Agendar Cita</button>
-        </div>
-        <div class="col-4">
-            <button type="button" class="btn btn-outline-secondary">Llamar Urgente</button>
-        </div>
-    </div>-->
+    <button type="submit" class="btn btn-success">
+        Agendar Cita
+    </button>
+</form>                
 </div>
 @endsection

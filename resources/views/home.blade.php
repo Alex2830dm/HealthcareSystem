@@ -9,31 +9,31 @@
     <div class="row justify-content-center">        
         <div class="col-4">
             <label class="text-center">Foto de Pefil:</label><br>
-            <img src="https://cdn.icon-icons.com/icons2/1154/PNG/512/1486564400-account_81513.png" width="200" heigh="auto">
+            <img src="https://static.vecteezy.com/system/resources/previews/000/574/512/non_2x/vector-sign-of-user-icon.jpg" width="220" heigh="auto">
         </div>
         <div class="col-4">
             <label class="text-center">Nombre:</label>
-            <input class="form-control" type="text" name="nombre" value="{{ Auth::user()->name }}" readonly>
+            <input class="form-control" type="text" name="name" value="{{ Auth::user()->name }}" readonly>
             <label class="text-center">Apellido:</label>
-            <input class="form-control" type="text" name="apellido" value="Martínez">
+            <input class="form-control" type="text" name="apellido" value="{{ Auth::user()->apellidos }}" readonly>
             <label class="text-center">Telefono:</label>
-            <input class="form-control" type="text" name="cedula" value="1212123">
+            <input class="form-control" type="text" name="telefono" value="{{ Auth::user()->telefono }}" readonly>
         </div>
     </div><br>
     <div class="row justify-content-center">
         <div class="col-4">
             <label class="text-center">Correo:</label>
-            <input class="form-control" type="text" name="direccion" value="{{ Auth::user()->email }}" readonly>
-        </div>
+            <input class="form-control" type="text" name="direccion" value="{{ Auth::user()->email }}" readonly>            
+        </div>        
         <div class="col-4">
-            <label class="text-center">Sexo:</label>
-            <input class="form-control" type="text" name="direccion" value="Carretera Huitzizilapan 1">
+            <label class="text-center">Zona:</label>
+            <input class="form-control" type="text" name="zona" value="{{ Auth::user()->zona }}" readonly>
         </div>
     </div>
     <div class="row justify-content-center">
         <div class="col-8">
             <label class="text-center">Direccion:</label>
-            <input class="form-control" type="text" name="direccion" value="Carretera Huitzizilapan 1">
+            <input class="form-control" type="text" name="direccion" value="{{ Auth::user()->direccion }}" readonly>
         </div>
     </div><br>
     <div class="row justify-content-center">

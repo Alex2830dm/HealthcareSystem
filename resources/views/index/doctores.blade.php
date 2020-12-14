@@ -10,21 +10,23 @@
         <div class="col-md-8">                
                 <table class="table table-hover table-striped">
                     <thead>
-                        <tr>
-                            <th>Foto</th>
+                        <tr>                            
                             <th>Cedula</th>
                             <th>Nombre</th>
                             <th>Apellido</th>
-                            <th>Especialidad</th>                            
+                            <th>Especialidad</th>
+                            <th>No Telefonico</th>
+                            <th>Llamar</th>
                         </tr>    
                     </thead>
                     <tbody>
-                        @foreach($doctores as $doctor)
-                            <th><img src="{{asset('Fotos_perfil/'.$doctor->imagen)}}" width="50"></th>
+                        @foreach($doctores as $doctor)                            
                             <th>{{$doctor->Cedula}}</th>
                             <th>{{$doctor->Nombre}}</th>
                             <th>{{$doctor->Apellidos}}</th>
-                            <th>{{$doctor->Especialidad}}</th>                            
+                            <th>{{$doctor->Especialidad}}</th>
+                            <th>{{$doctor->Telefono}}</th>
+                            <td><a href="tel:{{$doctor->Telefono}}"><img src="https://image.flaticon.com/icons/png/512/40/40316.png" width="20"></a></td>
                         </tr>
                         @endforeach
                     </tbody>

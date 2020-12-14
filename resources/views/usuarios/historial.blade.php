@@ -16,10 +16,11 @@
                     <th></th>
                 </thead>
                 <tbody>
+                @foreach($citas as $cita)
                     <tr>
-                        <td>05-12-2020</td>
-                        <td>Alex Martinez</td>
-                        <td>Revisado</td>
+                        <td>{{$cita->fecha}}</td>
+                        <td>{{$cita->Nombre}}</td>
+                        <td>{{$cita->usuario}}</td>
                         <td>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                 Ver Detalles
@@ -27,6 +28,7 @@
                         </td>
                     </tr>
                 </tbody>
+                @endforeach
             </table>
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -38,7 +40,9 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                        
+                        @foreach($citas as $cita)
+                            <input type="text" name="Nombre" value="{{$cita->Nombre}}" class="form-control">
+                        @endforeach
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
