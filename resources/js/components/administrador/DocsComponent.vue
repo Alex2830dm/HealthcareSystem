@@ -25,7 +25,7 @@
                     <button data-toggle="modal" data-target="#updateModal" type="button" class="btn btn-secondary" v-on:click="editDoctores(doctor)">
                         <img src="https://image.flaticon.com/icons/png/512/104/104668.png" width="20">
                     </button>
-                    <button data-toggle="modal" data-target="#deletemateria" type="button" class="btn btn-danger" v-on:click="deleteDoctor(doctor)">
+                    <button data-toggle="modal" data-target="#deletemateria"  type="button" class="btn btn-danger" v--on:click="deleteid(doctor)">
                         <img src="https://image.flaticon.com/icons/png/512/61/61848.png" width="20">
                     </button>
                 </th>
@@ -117,23 +117,23 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Eliminar Materia</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Eliminar Doctor</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <h4>¿Esta seguro que quieres eliminar la materia <span class="badge badge-pill badge-warning">{{eliminardoc.Nombre}}</span>?</h4>
-                            <!--{{materiadelete}}-->                            
+                        <h4>¿Esta seguro que quieres el Registro <span class="badge badge-pill badge-warning">{{doctordelete.Nombre}}</span>?</h4>
+                        <!--{{materiadelete}}-->                            
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-danger" @click="deleteDoctor(eliminardoc.id)">Eliminar</button>
+                        <button type="button" class="btn btn-danger" @click="deleteDoctor(doctordelete.id)">Eliminar</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div>    
 </template>
 <script>
 export default {
@@ -154,7 +154,7 @@ export default {
                 consultadom:"",
             },
             //array para obtener eliminar una materia materia
-            eliminardoc:[],
+            doctordelete:[],
             //array para modificar una materia en especifico
             editDocs: {
                 Nombre:"",
@@ -240,16 +240,27 @@ export default {
                 $('#updateModal').modal('hide');
             }).catch(error=>{
             });                
-        },    
-        deleteid(id){
-            this.eliminardoc = id;
         },
-        deleteDoctor(id) {
-            var url = "http://127.0.0.1:8000/admin/deletedoc/" + id;
-            axios.delete(url, this.eliminardoc).then (response=>{
-                this.getDoctores();
-                $('#updateModal').modal('hide');
-            });            
+        deleteid(id){
+            this.doctordelete =id; 
+        },
+        deleteDoctor: function() {
+            let url = 'http://127.0.0.1:8000/admin/deletedoc/' + id;
+                //eliminamos la materia
+                axios.delete(url, this.doctordelete).then (response=>{
+                    if(response.data.error){
+                    //mensaje de error si existe un errror
+                    toast.error('ocurrio un error');
+                }else{
+                // se elimina la materia
+                    this.getDoctores();
+                    toastr.info('La materia se elimino con exito '); // se ejecuta la alerta                
+                // se cierrra el modal 
+                $('#deletemateria').modal('hide');
+            }
+            }).catch(error =>{
+                toastr.error('error al actualizar');
+            });      
         }
     }
 };

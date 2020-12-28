@@ -2096,7 +2096,7 @@ __webpack_require__.r(__webpack_exports__);
         consultadom: ""
       },
       //array para obtener eliminar una materia materia
-      eliminardoc: [],
+      doctordelete: [],
       //array para modificar una materia en especifico
       editDocs: {
         Nombre: "",
@@ -2192,16 +2192,28 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {});
     },
     deleteid: function deleteid(id) {
-      this.eliminardoc = id;
+      this.doctordelete = id;
     },
-    deleteDoctor: function deleteDoctor(id) {
+    deleteDoctor: function deleteDoctor() {
       var _this4 = this;
 
-      var url = "http://127.0.0.1:8000/admin/deletedoc/" + id;
-      axios["delete"](url, this.eliminardoc).then(function (response) {
-        _this4.getDoctores();
+      var url = 'http://127.0.0.1:8000/admin/deletedoc/' + id; //eliminamos la materia
 
-        $('#updateModal').modal('hide');
+      axios["delete"](url, this.doctordelete).then(function (response) {
+        if (response.data.error) {
+          //mensaje de error si existe un errror
+          toast.error('ocurrio un error');
+        } else {
+          // se elimina la materia
+          _this4.getDoctores();
+
+          toastr.info('La materia se elimino con exito '); // se ejecuta la alerta                
+          // se cierrra el modal 
+
+          $('#deletemateria').modal('hide');
+        }
+      })["catch"](function (error) {
+        toastr.error('error al actualizar');
       });
     }
   }
@@ -2435,66 +2447,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       //array para obtener todos las  doctores
-      doctores: [],
-      datosdoctor: {
-        Nombre: "",
-        Apellidos: ""
-      },
-      Citas: {
-        Nombre: "",
-        Apellidos: "",
-        usuario: "",
-        usuariosape: "",
-        fecha: ""
-      }
+      doctores: []
     };
   },
   mounted: function mounted() {
@@ -2506,33 +2463,10 @@ __webpack_require__.r(__webpack_exports__);
     getDoctores: function getDoctores() {
       var _this = this;
 
-      axios.get("http://127.0.0.1:8000/usuarios/listadoctores").then(function (response) {
+      axios.get("http://127.0.0.1:8000/admin/listadoctores").then(function (response) {
         _this.doctores = response.data.doctores;
         console.log(_this.doctores);
       });
-    },
-    crearCita: function crearCita(doctor) {
-      this.datosdoctor.id = doctor.id;
-      this.datosdoctor.Nombre = doctor.Nombre;
-      this.datosdoctor.Apellidos = doctor.Apellidos;
-      $('#updateModal').modal('show');
-    },
-    //función para editar Materia
-    RegistrarCita: function RegistrarCita() {
-      var _this2 = this;
-
-      var url = 'http://127.0.0.1:8000/usuarios/registrar'; //actualizamos la materia
-
-      axios.put(url, this.Citas).then(function (response) {
-        _this2.getDoctores();
-
-        _this2.Citas.Nombre = "";
-        _this2.Citas.Apellidos = "";
-        _this2.Citas.usuario = "";
-        _this2.Citas.usuariosape = "";
-        _this2.Citas.fecha = "";
-        $('#updateModal').modal('hide');
-      })["catch"](function (error) {});
     }
   }
 });
@@ -2548,6 +2482,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
 //
 //
 //
@@ -38167,6 +38105,40 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/index.js?!./resources/js/components/proyecto/CitasComponent.vue?vue&type=script&lang=ts&":
+/*!****************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/proyecto/CitasComponent.vue?vue&type=script&lang=ts& ***!
+  \****************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data() {
+        return {
+            citas: [],
+        }
+    },
+});
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e&":
 /*!*******************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e& ***!
@@ -38292,16 +38264,20 @@ var render = function() {
               _c(
                 "button",
                 {
+                  directives: [
+                    {
+                      name: "-on",
+                      rawName: "v--on:click",
+                      value: _vm.deleteid(doctor),
+                      expression: "deleteid(doctor)",
+                      arg: "click"
+                    }
+                  ],
                   staticClass: "btn btn-danger",
                   attrs: {
                     "data-toggle": "modal",
                     "data-target": "#deletemateria",
                     type: "button"
-                  },
-                  on: {
-                    click: function($event) {
-                      return _vm.deleteDoctor(doctor)
-                    }
                   }
                 },
                 [
@@ -39071,11 +39047,11 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("h4", [
-                  _vm._v("¿Esta seguro que quieres eliminar la materia "),
+                  _vm._v("¿Esta seguro que quieres el Registro "),
                   _c(
                     "span",
                     { staticClass: "badge badge-pill badge-warning" },
-                    [_vm._v(_vm._s(_vm.eliminardoc.Nombre))]
+                    [_vm._v(_vm._s(_vm.doctordelete.Nombre))]
                   ),
                   _vm._v("?")
                 ])
@@ -39098,7 +39074,7 @@ var render = function() {
                     attrs: { type: "button" },
                     on: {
                       click: function($event) {
-                        return _vm.deleteDoctor(_vm.eliminardoc.id)
+                        return _vm.deleteDoctor(_vm.doctordelete.id)
                       }
                     }
                   },
@@ -39231,7 +39207,7 @@ var staticRenderFns = [
       _c(
         "h5",
         { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
-        [_vm._v("Eliminar Materia")]
+        [_vm._v("Eliminar Doctor")]
       ),
       _vm._v(" "),
       _c(
@@ -39781,6 +39757,49 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/proyecto/CitasComponent.vue?vue&type=template&id=65ff31cc&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/proyecto/CitasComponent.vue?vue&type=template&id=65ff31cc& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("table", { staticClass: "table table-hover table-striped" }, [
+      _c("thead", [
+        _c("th", [_vm._v("Día")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Doctor")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Estado")]),
+        _vm._v(" "),
+        _c("th")
+      ]),
+      _vm._v(" "),
+      _c("tbody")
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/proyecto/DoctoresComponent.vue?vue&type=template&id=46cf1651&":
 /*!*****************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/proyecto/DoctoresComponent.vue?vue&type=template&id=46cf1651& ***!
@@ -39814,176 +39833,12 @@ var render = function() {
               domProps: { textContent: _vm._s(doctor.Especialidad) }
             }),
             _vm._v(" "),
-            _c("th", [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-info",
-                  attrs: {
-                    "data-toggle": "modal",
-                    "data-target": "#updateModal",
-                    type: "button"
-                  },
-                  on: {
-                    click: function($event) {
-                      return _vm.crearCita(doctor)
-                    }
-                  }
-                },
-                [
-                  _vm._v(
-                    "\r\n                        Agendar Cita\r\n                    "
-                  )
-                ]
-              )
-            ])
+            _vm._m(1, true)
           ])
         }),
         0
       )
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "updateModal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "exampleModalLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c(
-                  "h5",
-                  {
-                    staticClass: "modal-title",
-                    attrs: { id: "exampleModalLabel" }
-                  },
-                  [
-                    _vm._v(
-                      "Modificar Datos Del Doctor " + _vm._s(_vm.Citas.Nombre)
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _vm._m(1)
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c(
-                  "form",
-                  {
-                    attrs: { method: "POST" },
-                    on: {
-                      submit: function($event) {
-                        $event.preventDefault()
-                        return _vm.RegistrarCita($event)
-                      }
-                    }
-                  },
-                  [
-                    _c("div", { staticClass: "row" }, [
-                      _c("div", { staticClass: "col-5" }, [
-                        _c(
-                          "label",
-                          {
-                            staticClass: "col-form-label",
-                            attrs: { for: "recipient-name" }
-                          },
-                          [_vm._v("Doctor:")]
-                        ),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.datosdoctor.Nombre,
-                              expression: "datosdoctor.Nombre"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "text", name: "Nombre", readonly: "" },
-                          domProps: { value: _vm.datosdoctor.Nombre },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.datosdoctor,
-                                "Nombre",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-5" }, [
-                        _c(
-                          "label",
-                          {
-                            staticClass: "col-form-label",
-                            attrs: { for: "recipient-name" }
-                          },
-                          [_vm._v("Apellidos:")]
-                        ),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.datosdoctor.Apellidos,
-                              expression: "datosdoctor.Apellidos"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            name: "Apellidos",
-                            readonly: ""
-                          },
-                          domProps: { value: _vm.datosdoctor.Apellidos },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.datosdoctor,
-                                "Apellidos",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _vm._m(2),
-                    _vm._v(" "),
-                    _vm._m(3),
-                    _vm._v(" "),
-                    _vm._m(4)
-                  ]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
-    )
+    ])
   ])
 }
 var staticRenderFns = [
@@ -40009,92 +39864,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "close",
-        attrs: {
-          type: "button",
-          "data-dismiss": "modal",
-          "aria-label": "Close"
-        }
-      },
-      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-5" }, [
+    return _c("th", [
+      _c("a", { attrs: { href: "'usuarios/agenda-cita/'$doctores.id" } }, [
         _c(
-          "label",
-          { staticClass: "col-form-label", attrs: { for: "recipient-name" } },
-          [_vm._v("Paciente:")]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", name: "usuario" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-5" }, [
-        _c(
-          "label",
-          { staticClass: "col-form-label", attrs: { for: "recipient-name" } },
-          [_vm._v("Apellidos:")]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", name: "usuariosape" }
-        })
+          "button",
+          { staticClass: "btn btn-info", attrs: { type: "button" } },
+          [
+            _vm._v(
+              "\r\n                            Agendar Cita\r\n                        "
+            )
+          ]
+        )
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-5" }, [
-        _c(
-          "label",
-          { staticClass: "col-form-label", attrs: { for: "recipient-name" } },
-          [_vm._v("Fecha:")]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "date", name: "fecha" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-secondary",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Cancelar")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary",
-          attrs: { ttype: "submit", name: "action" }
-        },
-        [_vm._v("Agendar")]
-      )
     ])
   }
 ]
@@ -40132,7 +39913,9 @@ var render = function() {
           _vm._v(" "),
           _c("th", { domProps: { textContent: _vm._s(emergencia.Zona) } }),
           _vm._v(" "),
-          _c("th", { domProps: { textContent: _vm._s(emergencia.Telefono) } })
+          _c("th", { domProps: { textContent: _vm._s(emergencia.Telefono) } }),
+          _vm._v(" "),
+          _vm._m(1, true)
         ])
       }),
       0
@@ -40150,8 +39933,23 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Zona")]),
         _vm._v(" "),
-        _c("th", [_vm._v("No. Telefono")])
+        _c("th", [_vm._v("No. Telefono")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Llamar")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { attrs: { href: "tel:$emergencias.Telefono" } }, [
+      _c("img", {
+        attrs: {
+          src: "https://image.flaticon.com/icons/png/512/40/40316.png",
+          width: "20"
+        }
+      })
     ])
   }
 ]
@@ -52349,15 +52147,15 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 //Componente por defecto
 
-Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]); //Componente para visualizar doctores
+Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]); //Componente para visualizar emergencias
 
-Vue.component('doctores-component', __webpack_require__(/*! ./components/proyecto/DoctoresComponent.vue */ "./resources/js/components/proyecto/DoctoresComponent.vue")["default"]); //Componente para visualizar emergencias
-
-Vue.component('emergencias-component', __webpack_require__(/*! ./components/proyecto/EmergenciasComponent.vue */ "./resources/js/components/proyecto/EmergenciasComponent.vue")["default"]); //Conponente para el administrador (emergencias)
+Vue.component('emergencias-component', __webpack_require__(/*! ./components/proyecto/EmergenciasComponent.vue */ "./resources/js/components/proyecto/EmergenciasComponent.vue")["default"]);
+Vue.component('doctores-component', __webpack_require__(/*! ./components/proyecto/DoctoresComponent */ "./resources/js/components/proyecto/DoctoresComponent.vue")["default"]); //Conponente para el administrador (emergencias)
 
 Vue.component('emer-component', __webpack_require__(/*! ./components/administrador/EmerComponet.vue */ "./resources/js/components/administrador/EmerComponet.vue")["default"]); //Componente para el administrador (doctores)
 
 Vue.component('doc-component', __webpack_require__(/*! ./components/administrador/DocsComponent.vue */ "./resources/js/components/administrador/DocsComponent.vue")["default"]);
+Vue.component('citas-component', __webpack_require__(/*! ./components/proyecto/CitasComponent.vue */ "./resources/js/components/proyecto/CitasComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -52617,6 +52415,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EmerComponet_vue_vue_type_template_id_1e878f8f___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EmerComponet_vue_vue_type_template_id_1e878f8f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/proyecto/CitasComponent.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/proyecto/CitasComponent.vue ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CitasComponent_vue_vue_type_template_id_65ff31cc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CitasComponent.vue?vue&type=template&id=65ff31cc& */ "./resources/js/components/proyecto/CitasComponent.vue?vue&type=template&id=65ff31cc&");
+/* harmony import */ var _CitasComponent_vue_vue_type_script_lang_ts___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CitasComponent.vue?vue&type=script&lang=ts& */ "./resources/js/components/proyecto/CitasComponent.vue?vue&type=script&lang=ts&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _CitasComponent_vue_vue_type_script_lang_ts___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CitasComponent_vue_vue_type_template_id_65ff31cc___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CitasComponent_vue_vue_type_template_id_65ff31cc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/proyecto/CitasComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/proyecto/CitasComponent.vue?vue&type=script&lang=ts&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/proyecto/CitasComponent.vue?vue&type=script&lang=ts& ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_CitasComponent_vue_vue_type_script_lang_ts___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib??vue-loader-options!./CitasComponent.vue?vue&type=script&lang=ts& */ "./node_modules/vue-loader/lib/index.js?!./resources/js/components/proyecto/CitasComponent.vue?vue&type=script&lang=ts&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_CitasComponent_vue_vue_type_script_lang_ts___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/proyecto/CitasComponent.vue?vue&type=template&id=65ff31cc&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/proyecto/CitasComponent.vue?vue&type=template&id=65ff31cc& ***!
+  \********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CitasComponent_vue_vue_type_template_id_65ff31cc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./CitasComponent.vue?vue&type=template&id=65ff31cc& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/proyecto/CitasComponent.vue?vue&type=template&id=65ff31cc&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CitasComponent_vue_vue_type_template_id_65ff31cc___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CitasComponent_vue_vue_type_template_id_65ff31cc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

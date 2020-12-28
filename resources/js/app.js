@@ -21,14 +21,15 @@ window.Vue = require('vue');
 
 //Componente por defecto
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-//Componente para visualizar doctores
-Vue.component('doctores-component', require('./components/proyecto/DoctoresComponent.vue').default);
 //Componente para visualizar emergencias
 Vue.component('emergencias-component', require('./components/proyecto/EmergenciasComponent.vue').default);
+
+Vue.component('doctores-component', require('./components/proyecto/DoctoresComponent').default);
 //Conponente para el administrador (emergencias)
 Vue.component('emer-component', require('./components/administrador/EmerComponet.vue').default);
 //Componente para el administrador (doctores)
 Vue.component('doc-component', require('./components/administrador/DocsComponent.vue').default);
+Vue.component('citas-component', require('./components/proyecto/CitasComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

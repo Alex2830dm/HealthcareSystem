@@ -7,8 +7,9 @@
 </div>   
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">                
-                <table class="table table-hover table-striped">
+        <div class="col-md-8">
+            <div class="card">
+            <table class="table table-hover table-striped">
                     <thead>
                         <tr>                            
                             <th>Cedula</th>
@@ -30,7 +31,8 @@
                         </tr>
                         @endforeach
                     </tbody>
-                </table>
+                </table>            
+            
             </div>
         </div>
     </div>

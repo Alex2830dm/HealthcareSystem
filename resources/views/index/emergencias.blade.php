@@ -29,6 +29,8 @@
                         @endforeach
                     </tbody>
                 </table>
+                <!--<emergencias-component>
+                </emergencias-component>-->
             </div>
         </div>
     </div>

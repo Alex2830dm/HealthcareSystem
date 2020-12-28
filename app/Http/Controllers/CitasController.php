@@ -20,7 +20,7 @@ class CitasController extends Controller
     }
     public function index($id)
     {                
-        $datos['citas']=Citas::all()->where('id', '=', $id);
+        $datos['citas']=Citas::all()->where('id_usuario', '=', $id);
         return view("usuarios.historial", $datos);
 
     }

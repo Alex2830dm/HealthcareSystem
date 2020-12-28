@@ -4,14 +4,18 @@
                         <tr>                            
                             <th>Institucion</th>
                             <th>Zona</th>
-                            <th>No. Telefono</th>                            
+                            <th>No. Telefono</th>
+                            <th>Llamar</th>
                         </tr>    
                     </thead>
                     <tbody>
                         <tr v-for="emergencia in emergencias" :key="emergencia.id">
                             <th v-text="emergencia.Institucion"></th>
                             <th v-text="emergencia.Zona"></th>
-                            <th v-text="emergencia.Telefono"></th>                                                   
+                            <th v-text="emergencia.Telefono"></th>
+                            <a href="tel:$emergencias.Telefono">
+                                <img src="https://image.flaticon.com/icons/png/512/40/40316.png" width="20">
+                            </a>
                         </tr>                           
                     </tbody>
                 </table>

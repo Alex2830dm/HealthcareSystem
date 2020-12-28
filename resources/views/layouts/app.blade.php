@@ -118,13 +118,13 @@
                                 </a>
                             </li>
                             <li>
-                                <form action="{{url('usuarios/historial/'. Auth::user()->id)}}" method="post">
+                                <a href="{{url('usuarios/historial/'. Auth::user()->id)}}">
                                     <button type="submit" class="btn btn-secondary">
                                         <img src="https://previews.123rf.com/images/jemastock/jemastock1708/jemastock170809156/84057196-un-dise%C3%B1o-de-ilustraci%C3%B3n-de-vector-de-imagen-de-icono-de-historial-de-historial-de-medicina-m%C3%A9dica-de-hobby-.jpg"
                                             width="20">
                                         Ver Historial De Consultas
                                     </button>
-                                </form>
+                                </a>
                             </li><br>
                             <li class="nav-item">
                                 <a href="{{url('admin/')}}">

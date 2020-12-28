@@ -14,9 +14,10 @@ class UsersContoller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index($id)
+    {                
+        $datos=Citas::all()->where('id_usuario', '=', $id);
+        return response()->json(['citas'=>$datos]);
     }
     public function list(){
         $datos['emergencias']=Emergencias::paginate(5);
@@ -25,15 +26,9 @@ class UsersContoller extends Controller
     /*Como se mando a llamar al controlador de emergencias
       se ocupo para listar y mostrar el directorio de emergencias
     */
-    public function historial(Request $request){
-        $query = trim($request->get('buscar'));
-        $users = Citas::where('usuario', 'LIKE', '%'. $query . "%");
-        return response()->json($users);
-        //$user = Citas::where("id_usuario","=", "1");
-        //return response()->json($user);
-        //$datos = Citas::find($id_usuario);
-        //return $datos;
-    }
+    public function cita($id){
+        return view('doctores.citas', ['citas'=> Doctores::findOrFail($id)]);
+    }        
     /**
      * Show the form for creating a new resource.
      *
@@ -63,7 +58,7 @@ class UsersContoller extends Controller
      */
     public function show($id)
     {
-        //
+        return view('usuarios.detalles', ['citas'=>Citas::findOrFail($id)]);
     }
 
     /**

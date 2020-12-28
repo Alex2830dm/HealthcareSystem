@@ -66,9 +66,9 @@ class DoctoresController extends Controller
      * @param  \App\Doctores  $doctores
      * @return \Illuminate\Http\Response
      */
-    public function show(Doctores $doctores)
+    public function show($id)
     {
-        //
+        return view('doctores.detalles', ['detalles'=> Doctores::findOrFail($id)]);
     }
 
     /**
@@ -77,9 +77,9 @@ class DoctoresController extends Controller
      * @param  \App\Doctores  $doctores
      * @return \Illuminate\Http\Response
      */
-    public function edit(Doctores $doctores)
+    public function edit($id)
     {
-        //
+
     }
 
     /**

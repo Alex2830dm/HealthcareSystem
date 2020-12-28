@@ -30,10 +30,12 @@ Route::group(['prefix' => 'usuarios'], function () {
     Route::get('listaemergencias', 'EmergenciasController@index')->middleware('auth'); //ruta para usar vue del directorio emergencias
 
     Route::get('doctores', 'DoctoresController@list')->middleware('auth'); //ruta para usar vue del directorio emergencias
+    Route::get('detalles/{id}', 'DoctoresController@show');
     Route::get('agenda-cita/{id}', 'CitasController@cita')->middleware('auth');
     Route::post('registrar', 'CitasController@store')->middleware('auth');
     
-    Route::post('historial/{id}', 'CitasController@index')->middleware('auth');
+    Route::get('historial/{id}', 'UsersContoller@index')->middleware('auth');
+    Route::get('detallescita/{id}', 'UsersContoller@show')->middleware('auth');
     
     Route::get('modificar/{id}', 'UsersContoller@edit')->middleware('auth');
     Route::patch('update/{id}', 'UsersContoller@update')->middleware('auth');//modificar datos
