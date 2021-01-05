@@ -14,10 +14,10 @@ class UsersContoller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index($username)
     {                
-        $datos=Citas::all()->where('id_usuario', '=', $id);
-        return response()->json(['citas'=>$datos]);
+        $datos=Citas::all()->where('usuario', '=', $username);
+        return view('usuarios.historial',['citas'=>$datos]);
     }
     public function list(){
         $datos['emergencias']=Emergencias::paginate(5);

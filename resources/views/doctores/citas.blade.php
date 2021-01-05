@@ -81,7 +81,7 @@
     <div class="row">
       <div class="col-5">
         <label for="costo">Costo:</label>
-        <input type="text" name="costo" id="resultado" class="form-control" readonly/>
+        <input type="text" name="consultadom" id="resultado" class="form-control" readonly/>
       </div>
     </div><br>
     <button type="submit" class="btn btn-success">

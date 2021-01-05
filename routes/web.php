@@ -30,7 +30,7 @@ Route::group(['prefix' => 'usuarios'], function () {
     Route::get('listaemergencias', 'EmergenciasController@index')->middleware('auth'); //ruta para usar vue del directorio emergencias
 
     Route::get('doctores', 'DoctoresController@list')->middleware('auth'); //ruta para usar vue del directorio emergencias
-    Route::get('detalles/{id}', 'DoctoresController@show');
+    Route::get('detalles/{id}', 'DoctoresController@show')->middleware('auth');
     Route::get('agenda-cita/{id}', 'CitasController@cita')->middleware('auth');
     Route::post('registrar', 'CitasController@store')->middleware('auth');
     
@@ -59,7 +59,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::put('editdocs/{id}', 'DoctoresController@update')->middleware('auth');
     Route::delete('deletedoc/{id}', 'DoctoresController@destroy');
 });
-
-/*Route::group(['prefix' => 'doctores'], function () {
-    route::get();    
-});*/
+Route::group(['prefix' => 'doctores'], function () {
+    Route::get('/', function(){return view('administrador.welcome');})->middleware('auth');
+});

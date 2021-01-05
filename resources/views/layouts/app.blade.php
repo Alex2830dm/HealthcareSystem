@@ -118,7 +118,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{url('usuarios/historial/'. Auth::user()->id)}}">
+                                <a href="{{url('usuarios/historial/'. Auth::user()->name)}}">
                                     <button type="submit" class="btn btn-secondary">
                                         <img src="https://previews.123rf.com/images/jemastock/jemastock1708/jemastock170809156/84057196-un-dise%C3%B1o-de-ilustraci%C3%B3n-de-vector-de-imagen-de-icono-de-historial-de-historial-de-medicina-m%C3%A9dica-de-hobby-.jpg"
                                             width="20">

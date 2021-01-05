@@ -20,7 +20,7 @@ class CitasController extends Controller
     }
     public function index($id)
     {                
-        $datos['citas']=Citas::all()->where('id_usuario', '=', $id);
+        $datos['citas']=Citas::all()->where('usuario', '=', 'Alex Donaldo');
         return view("usuarios.historial", $datos);
 
     }
@@ -47,17 +47,15 @@ class CitasController extends Controller
     public function store(Request $request)
     {
         //$citas = $this->cita->create($request->all());
-        $citas = new Citas;
-        $citas->id_doctor = request('id_doctor');
+        $citas = new Citas;        
         $citas->Nombre = request('Nombre');
-        $citas->Apellidos = request('Apellidos');
-        $citas->id_usuario = request('id_usuario');
+        $citas->Apellidos = request('Apellidos');        
         $citas->usuario = request('usuario');
         $citas->usuariosape = request('usuariosape');
         $citas->direccion = request('direccion');
         $citas->tipo = request('tipo');    
         $citas->fecha = request('fecha');
-        $citas->costo = request('costo');
+        $citas->costo = request('consultadom');
         $citas->save();
         //return response()->json($citas);
         return redirect('usuarios/home');

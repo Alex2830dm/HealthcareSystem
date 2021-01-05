@@ -8,7 +8,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <table class="table table-hover table-striped table-info">
+            <!--<table class="table table-hover table-striped table-info">
                 <thead>
                     <tr>
                         <th>Cedula</th>          
@@ -42,9 +42,9 @@
                     </tr>
                     @endforeach                    
                 </toby>  
-            </table>                                   
-                <!--<doctores-component>
-                </doctores-component>-->                           
+            </table>-->
+                <doctores-component>
+                </doctores-component>
         </div>
     </div>
 </div>
