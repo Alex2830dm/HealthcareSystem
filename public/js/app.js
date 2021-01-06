@@ -2587,6 +2587,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -40024,73 +40049,115 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("table", { staticClass: "table table-hover table-striped" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "tbody",
-        _vm._l(_vm.doctores, function(doctor) {
-          return _c("tr", { key: doctor.id }, [
-            _c("th", { domProps: { textContent: _vm._s(doctor.Cedula) } }),
-            _vm._v(" "),
-            _c("th", { domProps: { textContent: _vm._s(doctor.Nombre) } }),
-            _vm._v(" "),
-            _c("th", { domProps: { textContent: _vm._s(doctor.Apellidos) } }),
-            _vm._v(" "),
-            _c("th", {
-              domProps: { textContent: _vm._s(doctor.Especialidad) }
-            }),
-            _vm._v(" "),
-            _c("th", [
+    _c(
+      "div",
+      { staticClass: "row tm-mb-90 tm-gallery" },
+      _vm._l(_vm.doctores, function(doctor) {
+        return _c("div", { key: doctor.id, staticClass: "col-4" }, [
+          _c(
+            "div",
+            {
+              staticClass: "card border-info mb-3",
+              staticStyle: { "max-width": "18rem" }
+            },
+            [
               _c(
-                "button",
-                {
-                  staticClass: "btn btn-info",
-                  attrs: {
-                    type: "button",
-                    "data-toggle": "modal",
-                    "data-target": "#exampleModal"
-                  },
-                  on: {
-                    click: function($event) {
-                      return _vm.editDoctores(doctor)
-                    }
-                  }
-                },
+                "div",
+                { staticClass: "card-header bg-transparent border-secondary" },
                 [
-                  _vm._v(
-                    "\r\n                        Ver Información\r\n                    "
-                  )
+                  _c("h4", {
+                    staticClass: "text-primary",
+                    domProps: { textContent: _vm._s(doctor.Nombre) }
+                  })
                 ]
               ),
               _vm._v(" "),
+              _c("div", { staticClass: "card-body text-info" }, [
+                _c("h5", [
+                  _c("label", {
+                    domProps: { textContent: _vm._s(doctor.Nombre) }
+                  }),
+                  _vm._v(" "),
+                  _c("label", {
+                    domProps: { textContent: _vm._s(doctor.Apellidos) }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("label", [_vm._v("Cedula: ")]),
+                _vm._v(" "),
+                _c("label", {
+                  domProps: { textContent: _vm._s(doctor.Cedula) }
+                }),
+                _c("br"),
+                _vm._v(" "),
+                _c("label", [_vm._v("Especialidad: ")]),
+                _vm._v(" "),
+                _c("label", {
+                  domProps: { textContent: _vm._s(doctor.Especialidad) }
+                }),
+                _c("br"),
+                _vm._v(" "),
+                _c("label", [_vm._v("Zona: ")]),
+                _vm._v(" "),
+                _c("label", { domProps: { textContent: _vm._s(doctor.Zona) } }),
+                _c("br")
+              ]),
+              _vm._v(" "),
               _c(
-                "button",
-                {
-                  staticClass: "btn btn-secondary",
-                  attrs: {
-                    type: "button",
-                    "data-toggle": "modal",
-                    "data-target": "#CitaModal"
-                  },
-                  on: {
-                    click: function($event) {
-                      return _vm.Citas(doctor)
-                    }
-                  }
-                },
+                "div",
+                { staticClass: "card-footer bg-transparent border-secondary" },
                 [
-                  _vm._v(
-                    "\r\n                        Agendar Cita\r\n                    "
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-info",
+                      attrs: {
+                        type: "button",
+                        "data-toggle": "modal",
+                        "data-target": "#exampleModal"
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.editDoctores(doctor)
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\r\n                    Ver Información\r\n                "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary",
+                      attrs: {
+                        type: "button",
+                        "data-toggle": "modal",
+                        "data-target": "#CitaModal"
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.Citas(doctor)
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\r\n                    Agendar Cita\r\n                "
+                      )
+                    ]
                   )
                 ]
               )
-            ])
-          ])
-        }),
-        0
-      )
-    ]),
+            ]
+          )
+        ])
+      }),
+      0
+    ),
     _vm._v(" "),
     _c(
       "div",
@@ -40123,7 +40190,7 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _vm._m(1)
+              _vm._m(0)
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "modal-body" }, [
@@ -40443,7 +40510,7 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(2)
+            _vm._m(1)
           ])
         ])
       ]
@@ -40471,7 +40538,7 @@ var render = function() {
                   attrs: { id: "exampleModalLabel" }
                 },
                 [
-                  _vm._v("Datos del Doctor: "),
+                  _vm._v("Agendar Cita Con El Doctor: "),
                   _c(
                     "span",
                     { staticClass: "badge badge-pill badge-primary" },
@@ -40480,7 +40547,7 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _vm._m(3)
+              _vm._m(2)
             ]),
             _vm._v(" "),
             _c(
@@ -40813,7 +40880,7 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._m(4)
+                _vm._m(3)
               ]
             )
           ])
@@ -40823,24 +40890,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Cedula")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Nombre")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Apellido")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Especialidad")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Acciones")])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -40869,13 +40918,7 @@ var staticRenderFns = [
           staticClass: "btn btn-secondary",
           attrs: { type: "button", "data-dismiss": "modal" }
         },
-        [_vm._v("Close")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "button" } },
-        [_vm._v("Save changes")]
+        [_vm._v("Cerrar")]
       )
     ])
   },
@@ -40905,9 +40948,9 @@ var staticRenderFns = [
         "button",
         {
           staticClass: "btn btn-secondary",
-          attrs: { type: "button", "data-dismiss": "modal" }
+          attrs: { type: "reset", "data-dismiss": "modal" }
         },
-        [_vm._v("Close")]
+        [_vm._v("Cancelar")]
       ),
       _vm._v(" "),
       _c(

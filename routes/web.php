@@ -22,16 +22,16 @@ Auth::routes();
 Route::group(['prefix' => 'usuarios'], function () {
     Route::get('/', function(){return view('welcome');})->middleware('auth');
     Route::get('home', 'HomeController@index')->name('home')->middleware('auth');//pagina principal
-    Route::get('quienes-somos', function () { return view('quienes-somos.index'); })->middleware('auth');
-    Route::get('unete-hs', function () { return view('quienes-somos.informacion'); })->middleware('auth');
-    Route::get('primeros-auxilios', function () { return view('servicios.index'); })->middleware('auth');
+    Route::get('quienes-somos', function () { return view('usuarios.quienes-somos'); })->middleware('auth');
+    Route::get('unete-hs', function () { return view('usuarios.unete-hs'); })->middleware('auth');
+    Route::get('primeros-auxilios', function () { return view('usuarios.primeros-auxilios'); })->middleware('auth');
 
     Route::get('emergencias', function(){return view('servicios.emergencias');})->middleware('auth'); //pagina del dorectorio de doctores
     Route::get('listaemergencias', 'EmergenciasController@index')->middleware('auth'); //ruta para usar vue del directorio emergencias
 
     Route::get('doctores', 'DoctoresController@list')->middleware('auth'); //ruta para usar vue del directorio emergencias
-    Route::get('detalles/{id}', 'DoctoresController@show')->middleware('auth');
-    Route::get('agenda-cita/{id}', 'CitasController@cita')->middleware('auth');
+    //Route::get('detalles/{id}', 'DoctoresController@show')->middleware('auth');
+    //Route::get('agenda-cita/{id}', 'CitasController@cita')->middleware('auth');
     Route::post('registrar', 'CitasController@store')->middleware('auth');
     
     Route::get('historial/{id}', 'UsersContoller@index')->middleware('auth');

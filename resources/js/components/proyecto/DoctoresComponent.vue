@@ -13,7 +13,33 @@ function valor() {
 </script>
 <template>
 <div>
-    <table class="table table-hover table-striped">
+    <div class="row tm-mb-90 tm-gallery">
+        <div class="col-4" v-for="doctor in doctores" :key="doctor.id">            
+            <div class="card border-info mb-3" style="max-width: 18rem;" >
+            <div class="card-header bg-transparent border-secondary">
+                <h4 class="text-primary" v-text="doctor.Nombre"></h4>
+            </div>
+            <div class="card-body text-info">
+                    <h5>
+                        <label v-text="doctor.Nombre"></label>
+                        <label v-text="doctor.Apellidos"></label>
+                    </h5>
+                    <label>Cedula: </label> <label v-text="doctor.Cedula"></label><br>
+                    <label>Especialidad: </label> <label v-text="doctor.Especialidad"></label><br>
+                    <label>Zona: </label> <label v-text="doctor.Zona"></label><br>
+            </div>
+            <div class="card-footer bg-transparent border-secondary">
+                <button type="button" class="btn btn-info"  data-toggle="modal" data-target="#exampleModal" v-on:click="editDoctores(doctor)">
+                    Ver Información
+                </button>
+                <button type="button" class="btn btn-secondary"  data-toggle="modal" data-target="#CitaModal" v-on:click="Citas(doctor)">
+                    Agendar Cita
+                </button>
+            </div>
+        </div>
+        </div>
+    </div>    
+    <!--<table class="table table-hover table-striped">
         <thead>
             <tr>                            
                 <th>Cedula</th>
@@ -39,7 +65,7 @@ function valor() {
                 </th>                           
             </tr>                           
         </tbody>
-    </table>
+    </table>-->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -98,8 +124,7 @@ function valor() {
                     </div>                                                                                                            
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>                    
                 </div>
             </div>
         </div>
@@ -108,7 +133,7 @@ function valor() {
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Datos del Doctor: <span class="badge badge-pill badge-primary">{{datosCita.Nombre}}</span></h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Agendar Cita Con El Doctor: <span class="badge badge-pill badge-primary">{{datosCita.Nombre}}</span></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -159,8 +184,8 @@ function valor() {
                         </div>
                     </div>                    
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <div class="modal-footer">                    
+                    <button type="reset" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <button type="submit" name="action" class="btn btn-primary">Guardar</button>
                 </div>
                 </form>

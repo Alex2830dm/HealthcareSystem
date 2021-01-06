@@ -24,7 +24,7 @@ class DoctoresController extends Controller
     }
     public function list(){
         $datos['doctores']=Doctores::paginate(5);
-        return view("doctores.index", $datos);
+        return view("usuarios.doctores", $datos);
     }
 
     /**
